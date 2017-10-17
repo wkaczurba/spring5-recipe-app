@@ -1,0 +1,11 @@
+git remote add uppstream https://github.com/springframeworkguru/spring5-recipe-app
+
+Merging: ( https://help.github.com/articles/syncing-a-fork/ )
+
+git fetch upstream
+
+#perhaps may want to skip this one:
+# git checkout master 
+
+git merge upstream/master
+
