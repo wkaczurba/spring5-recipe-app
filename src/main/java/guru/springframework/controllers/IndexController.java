@@ -13,8 +13,10 @@ import guru.springframework.domain.UnitOfMeasure;
 import guru.springframework.repositories.CategoryRepository;
 import guru.springframework.repositories.UnitOfMeasureRepository;
 import guru.springframework.services.RecipeListerService;
+import lombok.extern.slf4j.Slf4j;
 
 @Controller
+@Slf4j
 public class IndexController {
 	
 	private CategoryRepository categoryRepository;
@@ -32,7 +34,7 @@ public class IndexController {
   
 	@RequestMapping({"/", "", "/index"})
 	public String getIndexPage(Model model) {
-		System.out.println("index requested");
+		log.info("index requested");
 		
 		Optional<Category> categoryOptional = categoryRepository.findByDescription("American");
 		Optional<UnitOfMeasure> unitOfMeasure = unitOfMeasureRepository.findByDescription("Tablespoon");
@@ -46,6 +48,7 @@ public class IndexController {
 
 	@RequestMapping("/recipe")
 	public String getRecipes(Model model) {
+		log.info("Recipes requested");
 		List<Recipe> recipes = recipeListerService.getAllRecipes();
 		//model.addAttribute("recipes", recipes);
 		model.addAttribute(recipes);
