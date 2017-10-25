@@ -1,5 +1,7 @@
 package guru.springframework.domain;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,22 +9,18 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
+@Data
 public class UnitOfMeasure {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Getter @Setter
 	private Long id;
 	
-//	@OneToOne
-//	@Getter @Setter
-//	private Ingredient ingredient;
-	
-	@Getter @Setter
 	@Column(unique=true)
 	private String description;
 }

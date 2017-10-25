@@ -7,25 +7,24 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.OneToOne;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
+@Data
 public class Notes {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Getter @Setter
 	private Long id;
 	
 	// @OneToOne will allow moving backk to the Recipe, but:
 	// NO CASCADING, as we dont want to delete Notes on deletion of recipe;
 	@OneToOne 
-	@Getter @Setter
 	private Recipe recipe; // parent recipe
 	
 	@Lob
-	@Getter @Setter
 	private String recipeNotes;
 	
 	

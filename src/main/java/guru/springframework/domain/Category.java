@@ -9,30 +9,19 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
+@Data
 public class Category {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Getter @Setter
 	private Long id;
 	
-	
-	@Getter
-	@Setter
 	private String description;
 	
-//	@Getter
-//	@Setter
-//	private BigDecimal amount;
-	
-	@Getter
-	@Setter
 	@ManyToMany(mappedBy="categories")
 	private Set<Recipe> recipe;
-
-	
-	
 }

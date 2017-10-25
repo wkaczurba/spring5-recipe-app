@@ -11,28 +11,25 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
+@Data
 public class Ingredient {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Getter @Setter
 	private Long id;
 	
 	@ManyToOne // NO CASCADING, AS THIS IS A CHILD OF Recipe.
-	@Getter @Setter
 	private Recipe recipe;
 	
-	@Getter @Setter
 	private String description;
 
-	@Getter @Setter
 	private BigDecimal amount;
 
-	@Getter @Setter
 	@OneToOne(fetch = FetchType.EAGER)
 	private UnitOfMeasure unitOfMeas;	
 }
