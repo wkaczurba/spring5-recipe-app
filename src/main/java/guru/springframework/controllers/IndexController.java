@@ -31,29 +31,14 @@ public class IndexController {
 		this.unitOfMeasureRepository = unitOfMeasureRepository;
 		this.recipeListerService = recipeListerService;
 	}
-  
-	@RequestMapping({"/", "", "/index"})
-	public String getIndexPage(Model model) {
-		log.info("index requested");
-		
-		Optional<Category> categoryOptional = categoryRepository.findByDescription("American");
-		Optional<UnitOfMeasure> unitOfMeasure = unitOfMeasureRepository.findByDescription("Tablespoon");
-		
-//HERE!		model.addAttribute(recipes);
-		System.out.println("category=" + categoryOptional.get().getId());
-		System.out.println("unitOfMeasure=" + unitOfMeasure.get().getId());
-	
-		return "index";
-	}
 
-	@RequestMapping("/recipe")
-	public String getRecipes(Model model) {
-		log.info("Recipes requested");
-		List<Recipe> recipes = recipeListerService.getAllRecipes();
-		//model.addAttribute("recipes", recipes);
-		model.addAttribute(recipes);
-		
-		return "recipes";
-	}
+    @RequestMapping({"", "/", "/index"})
+    public String getIndexPage(Model model) {
+        log.debug("Getting Index page");
+
+        model.addAttribute("recipes", recipeListerService.getAllRecipes());
+
+        return "index";
+    }	
 	
 }

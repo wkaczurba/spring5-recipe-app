@@ -1,5 +1,6 @@
 package guru.springframework.domain;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -26,7 +27,10 @@ import lombok.Setter;
 public class Recipe {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;	
+	private Long id;
+	
+	@Lob
+	private String directions;
 	private String description;
 	private Integer prepTime;
 	private Integer cookTime;
@@ -44,11 +48,11 @@ public class Recipe {
 	@JoinTable(name = "recipe_category",
 			joinColumns = @JoinColumn(name="recipe_id"), 
 			inverseJoinColumns=@JoinColumn(name="category_id"))
-	private Set<Category> categories;
+	private Set<Category> categories = new HashSet<>();
 
 	// NOTE: We are using mappedBy -> to point to a property on a child's object
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="recipe")
-	private Set<Ingredient> ingredients;
+	private Set<Ingredient> ingredients = new HashSet<>();
 	
 	@Lob
 	private Byte[] image;

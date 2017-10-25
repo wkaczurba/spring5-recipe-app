@@ -33,7 +33,23 @@ public class Ingredient {
 	private BigDecimal amount;
 
 	@OneToOne(fetch = FetchType.EAGER)
-	private UnitOfMeasure unitOfMeas;	
+	private UnitOfMeasure unitOfMeas;
+	
+    public Ingredient() {
+    }
+
+    public Ingredient(String description, BigDecimal amount, UnitOfMeasure uom) {
+        this.description = description;
+        this.amount = amount;
+        this.unitOfMeas = uom;
+    }
+
+    public Ingredient(String description, BigDecimal amount, UnitOfMeasure uom, Recipe recipe) {
+        this.description = description;
+        this.amount = amount;
+        this.unitOfMeas = uom;
+        this.recipe = recipe;
+    }	
 }
 
 
