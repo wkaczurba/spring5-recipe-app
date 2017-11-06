@@ -2,10 +2,16 @@ package guru.springframework.services;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import guru.springframework.commands.RecipeCommand;
+import guru.springframework.converters.RecipeCommandToRecipe;
+import guru.springframework.converters.RecipeToRecipeCommand;
 import guru.springframework.domain.Recipe;
 import guru.springframework.repositories.RecipeRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -15,10 +21,17 @@ import lombok.extern.slf4j.Slf4j;
 public class RecipeListerServiceImpl implements RecipeListerService {
 	
 	RecipeRepository recipeRepository;
+	RecipeCommandToRecipe recipeCommandToRecipe;
+	RecipeToRecipeCommand recipeToRecipeCommand;
 	
 	@Autowired
-	public RecipeListerServiceImpl(RecipeRepository recipeRepository) {
-		this.recipeRepository = recipeRepository; 
+	public RecipeListerServiceImpl(
+			RecipeRepository recipeRepository, 
+			RecipeCommandToRecipe recipeCommandToRecipe,
+			RecipeToRecipeCommand recipeToRecipeCommand) {
+		this.recipeRepository = recipeRepository;
+		this.recipeCommandToRecipe = recipeCommandToRecipe;
+		this.recipeToRecipeCommand = recipeToRecipeCommand;
 	}
 
 	@Override
@@ -29,5 +42,25 @@ public class RecipeListerServiceImpl implements RecipeListerService {
 		recipeRepository.findAll().forEach(list::add);
 		return list;
 	}
-
+	
+	@Override
+	public Recipe findById(Long id) {
+		Optional<Recipe> recipeOptional = recipeRepository.findById(id);
+		if (recipeOptional.isPresent()) {
+			return recipeOptional.get();
+		} else {
+			throw new RuntimeException("Recipe id="+id+" not present.");
+		}
+	}
+		
+	
+	@Override
+	@Transactional
+	public RecipeCommand saveRecipeCommand(RecipeCommand command) {
+		Recipe detachedRecipe = recipeCommandToRecipe.convert(command);
+		Recipe savedRecipe = recipeRepository.save(detachedRecipe);
+		log.debug("Savedrecipe id=" + savedRecipe.getId());
+		return recipeToRecipeCommand.convert(savedRecipe);
+	}
+	
 }

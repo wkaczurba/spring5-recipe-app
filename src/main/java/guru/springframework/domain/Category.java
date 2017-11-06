@@ -1,6 +1,5 @@
 package guru.springframework.domain;
 
-import java.math.BigDecimal;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -11,8 +10,6 @@ import javax.persistence.ManyToMany;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
 
 @Entity
 @Data
@@ -25,5 +22,5 @@ public class Category {
 	private String description;
 	
 	@ManyToMany(mappedBy="categories")
-	private Set<Recipe> recipe;
+	private Set<Recipe> recipes;
 }

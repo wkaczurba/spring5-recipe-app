@@ -14,7 +14,7 @@ import lombok.Setter;
 
 @Entity
 @Data
-@EqualsAndHashCode(exclude={"recipe"})
+@EqualsAndHashCode(exclude = {"recipe"})
 public class Notes {
 
 	@Id
