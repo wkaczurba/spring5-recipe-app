@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import guru.springframework.domain.Category;
@@ -32,6 +33,7 @@ public class IndexController {
 		this.recipeListerService = recipeListerService;
 	}
 
+	@GetMapping
     @RequestMapping({"", "/", "/index"})
     public String getIndexPage(Model model) {
         log.debug("Getting Index page");

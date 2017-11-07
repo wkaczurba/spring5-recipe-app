@@ -46,25 +46,28 @@
                  <th>Description</th>
                  <th>View</th>
                  <th>Update</th>
+                 <th>Delete</th>
                </tr>
                </thead>
                <tr th:remove="all">
                   <td>123</td>
                   <td>Tasty goodness 1</td>
                   <td><a href="#">View</a></td>
-                  <td><a href="#">Update</a></td>                  
+                  <td><a href="#">Update</a></td>
+                  <td><a href="#">Delete</a></td>                  
                </tr>
                <tr th:remove="all">
                   <td>345</td>
                   <td>Tasty Goodness 3</td>
                   <td><a href="#">View</a></td>
-                  <td><a href="#">Update</a></td>                  
+                  <td><a href="#">Delete</a></td>                  
                </tr>
                <tr th:each="recipe : ${recipes}">
                   <td th:text="${recipe.id}">954</td>
                   <td th:text="${recipe.description}">Tasty Goodness 3</td>
                   <td><a th:href="@{'/recipe/' + ${recipe.id} + '/show'}">View</a></td>
                   <td><a th:href="@{'/recipe/' + ${recipe.id} + '/update'}">Update</a></td>
+                  <td><a th:href="@{'/recipe/' + ${recipe.id} + '/delete'}">Delete</a></td>
                </tr>
              </table>
            </div>
