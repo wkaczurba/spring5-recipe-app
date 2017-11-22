@@ -35,7 +35,7 @@ public class RecipeServiceImpl implements RecipeService {
 	}
 
 	@Override
-	public List<Recipe> getAllRecipes() {
+	public List<Recipe> getRecipes() {
 		log.debug("I am in the service");
 		
 		List<Recipe> list = new ArrayList<Recipe>();

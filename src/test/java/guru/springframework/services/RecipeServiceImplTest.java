@@ -69,7 +69,7 @@ public class RecipeServiceImplTest {
         receipesData.add(recipe);
 
         when(recipeRepository.findAll()).thenReturn(receipesData);
-        List<Recipe> recipes = recipeService.getAllRecipes();
+        List<Recipe> recipes = recipeService.getRecipes();
 
         assertEquals(recipes.size(), 1);
         verify(recipeRepository, times(1)).findAll();

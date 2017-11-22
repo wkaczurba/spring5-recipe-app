@@ -7,7 +7,7 @@ import guru.springframework.domain.Recipe;
 
 public interface RecipeService {
 	
-	List<Recipe> getAllRecipes();
+	List<Recipe> getRecipes();
 	Recipe findById(Long id);
 	RecipeCommand saveRecipeCommand(RecipeCommand command);
 	RecipeCommand findCommandById(Long id);

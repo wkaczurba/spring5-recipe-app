@@ -48,7 +48,7 @@ public class IndexControllerTest {
 	@Before
 	public void setup() {
 		MockitoAnnotations.initMocks(this);
-		indexController = new IndexController(categoryRepo, uomRepo, recipeLister);	
+		indexController = new IndexController(recipeLister);	
 	}
 	
 	@Test
@@ -67,7 +67,7 @@ public class IndexControllerTest {
 		List<Recipe> recipes = new ArrayList<>();
 		recipes.add(new Recipe());
 		recipes.add(new Recipe());
-		when(recipeLister.getAllRecipes()).thenReturn(recipes);
+		when(recipeLister.getRecipes()).thenReturn(recipes);
 		ArgumentCaptor<List<Recipe>> argumentCaptor = ArgumentCaptor.forClass(List.class);
 		
 		// when:
@@ -75,7 +75,7 @@ public class IndexControllerTest {
 		
 		// then:
 		assertEquals("index", viewName);
-		verify(recipeLister, times(1)).getAllRecipes();
+		verify(recipeLister, times(1)).getRecipes();
 		verify(model, times(1)).addAttribute(eq("recipes"),  argumentCaptor.capture());
 		List<Recipe> setInController = argumentCaptor.getValue();
 		assertEquals(2, setInController.size());

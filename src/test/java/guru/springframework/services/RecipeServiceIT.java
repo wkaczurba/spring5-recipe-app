@@ -41,7 +41,7 @@ public class RecipeServiceIT {
 		Recipe testRecipe = recipes.iterator().next();
 		RecipeCommand testRecipeCommand = recipeToRecipeCommand.convert(testRecipe);
 		
-		recipeListerService.getAllRecipes();
+		recipeListerService.getRecipes();
 		
 		// when:
 		testRecipeCommand.setDescription(NEW_DESCRIPTION);
