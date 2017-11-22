@@ -5,7 +5,7 @@ import java.util.List;
 import guru.springframework.commands.RecipeCommand;
 import guru.springframework.domain.Recipe;
 
-public interface RecipeListerService {
+public interface RecipeService {
 	
 	List<Recipe> getAllRecipes();
 	Recipe findById(Long id);

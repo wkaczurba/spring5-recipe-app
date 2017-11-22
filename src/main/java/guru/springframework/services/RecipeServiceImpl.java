@@ -18,14 +18,14 @@ import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
-public class RecipeListerServiceImpl implements RecipeListerService {
+public class RecipeServiceImpl implements RecipeService {
 	
 	RecipeRepository recipeRepository;
 	RecipeCommandToRecipe recipeCommandToRecipe;
 	RecipeToRecipeCommand recipeToRecipeCommand;
 	
 	@Autowired
-	public RecipeListerServiceImpl(
+	public RecipeServiceImpl(
 			RecipeRepository recipeRepository, 
 			RecipeCommandToRecipe recipeCommandToRecipe,
 			RecipeToRecipeCommand recipeToRecipeCommand) {

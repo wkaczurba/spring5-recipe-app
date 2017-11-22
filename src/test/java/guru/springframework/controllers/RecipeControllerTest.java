@@ -22,7 +22,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import guru.springframework.commands.RecipeCommand;
 import guru.springframework.domain.Recipe;
-import guru.springframework.services.RecipeListerServiceImpl;
+import guru.springframework.services.RecipeServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
@@ -33,7 +33,7 @@ public class RecipeControllerTest {
 	RecipeController recipeController;
 	
 	@Mock
-	RecipeListerServiceImpl recipeListerService;
+	RecipeServiceImpl recipeListerService;
 		
 	@Before
 	public void setup() {

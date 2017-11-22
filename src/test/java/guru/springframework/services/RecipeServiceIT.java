@@ -23,7 +23,7 @@ public class RecipeServiceIT {
 	public final String NEW_DESCRIPTION = "SOME DESC.";
 
 	@Autowired
-	RecipeListerService recipeListerService;
+	RecipeService recipeListerService;
 	
 	@Autowired
 	RecipeRepository recipeRepository;

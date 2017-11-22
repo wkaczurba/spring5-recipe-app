@@ -10,16 +10,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import guru.springframework.commands.RecipeCommand;
-import guru.springframework.services.RecipeListerService;
+import guru.springframework.services.RecipeService;
 
 
 @Controller
 public class RecipeController {
 	
-	RecipeListerService recipeListerService;
+	RecipeService recipeListerService;
 	
 	@Autowired
-	public RecipeController(RecipeListerService recipeService) {
+	public RecipeController(RecipeService recipeService) {
 		this.recipeListerService = recipeService;
 	}
 	

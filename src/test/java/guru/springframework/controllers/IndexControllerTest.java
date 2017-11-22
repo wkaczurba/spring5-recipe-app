@@ -26,7 +26,7 @@ import org.springframework.ui.Model;
 import guru.springframework.domain.Recipe;
 import guru.springframework.repositories.CategoryRepository;
 import guru.springframework.repositories.UnitOfMeasureRepository;
-import guru.springframework.services.RecipeListerService;
+import guru.springframework.services.RecipeService;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
@@ -34,7 +34,7 @@ import lombok.extern.slf4j.Slf4j;
 public class IndexControllerTest {
 	
 	@Mock
-	RecipeListerService recipeLister;
+	RecipeService recipeLister;
 	@Mock
 	CategoryRepository categoryRepo;
 	@Mock

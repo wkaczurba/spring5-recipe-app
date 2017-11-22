@@ -13,7 +13,7 @@ import guru.springframework.domain.Recipe;
 import guru.springframework.domain.UnitOfMeasure;
 import guru.springframework.repositories.CategoryRepository;
 import guru.springframework.repositories.UnitOfMeasureRepository;
-import guru.springframework.services.RecipeListerService;
+import guru.springframework.services.RecipeService;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
@@ -22,11 +22,11 @@ public class IndexController {
 	
 	private CategoryRepository categoryRepository;
 	private UnitOfMeasureRepository unitOfMeasureRepository;
-	private RecipeListerService recipeListerService;
+	private RecipeService recipeListerService;
 	
 	public IndexController(CategoryRepository categoryRepository,
 			UnitOfMeasureRepository unitOfMeasureRepository,
-			RecipeListerService recipeListerService) {
+			RecipeService recipeListerService) {
 		
 		this.categoryRepository = categoryRepository;
 		this.unitOfMeasureRepository = unitOfMeasureRepository;
