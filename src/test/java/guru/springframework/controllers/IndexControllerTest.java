@@ -8,6 +8,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -64,11 +65,11 @@ public class IndexControllerTest {
 	public void getIndexTest() {
 		log.info("getIndexTest starts");
 		
-		List<Recipe> recipes = new ArrayList<>();
+		Set<Recipe> recipes = new HashSet<>();
 		recipes.add(new Recipe());
 		recipes.add(new Recipe());
 		when(recipeLister.getRecipes()).thenReturn(recipes);
-		ArgumentCaptor<List<Recipe>> argumentCaptor = ArgumentCaptor.forClass(List.class);
+		ArgumentCaptor<Set<Recipe>> argumentCaptor = ArgumentCaptor.forClass(Set.class);
 		
 		// when:
 		String viewName = indexController.getIndexPage(model);
@@ -77,7 +78,7 @@ public class IndexControllerTest {
 		assertEquals("index", viewName);
 		verify(recipeLister, times(1)).getRecipes();
 		verify(model, times(1)).addAttribute(eq("recipes"),  argumentCaptor.capture());
-		List<Recipe> setInController = argumentCaptor.getValue();
+		Set<Recipe> setInController = argumentCaptor.getValue();
 		assertEquals(2, setInController.size());
 		
 	}

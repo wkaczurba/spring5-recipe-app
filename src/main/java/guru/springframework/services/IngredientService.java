@@ -1,12 +1,13 @@
 package guru.springframework.services;
 
-import org.springframework.stereotype.Service;
-
 import guru.springframework.commands.IngredientCommand;
 
+/**
+ * Created by jt on 6/27/17.
+ */
 public interface IngredientService {
-	IngredientCommand findByRecipeIdAndIngredientId(long recipeId, long ingredientId);
-	IngredientCommand saveIngredient(IngredientCommand command);
-	void deleteById(Long recipeId, Long idToDelete);
-	
+
+    IngredientCommand findByRecipeIdAndIngredientId(Long recipeId, Long ingredientId);
+
+    IngredientCommand saveIngredientCommand(IngredientCommand command);
 }
