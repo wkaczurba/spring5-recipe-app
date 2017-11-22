@@ -1,18 +1,16 @@
 package guru.springframework.commands;
 
-import java.util.Set;
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter
+/**
+ * Created by jt on 6/21/17.
+ */
 @Setter
+@Getter
 @NoArgsConstructor
 public class CategoryCommand {
-	private Long id;
-	private String description;
-	//private Set<RecipeCommand> recipe;
-	
-	
+    private Long id;
+    private String description;
 }
