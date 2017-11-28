@@ -88,4 +88,14 @@ public class IngredientController {
 
         return "redirect:/recipe/" + savedCommand.getRecipeId() + "/ingredient/" + savedCommand.getId() + "/show";
     }
+    
+    // http://127.0.0.1:8080/recipe/1/ingredient/7/delete
+    @GetMapping
+    @RequestMapping("recipe/{recipeId}/ingredient/{ingredientId}/delete")
+    public String deleteIngredient(@PathVariable String recipeId, @PathVariable String ingredientId, Model model) {
+    	log.debug("deleting id=" + recipeId + " ingredientId=" + ingredientId);
+    	ingredientService.deleteByRecipeAndIngredientId(Long.valueOf(recipeId), Long.valueOf(ingredientId));
+		//return "redirect:/recipe/" + recipeId + "/ingredient/" + ingredientId + "";
+	    return "redirect:/recipe/"+ recipeId +"/ingredients";
+    }
 }

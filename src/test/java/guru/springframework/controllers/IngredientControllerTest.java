@@ -13,6 +13,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
@@ -38,7 +39,7 @@ public class IngredientControllerTest {
 	@Before
 	public void setUp() {
 		MockitoAnnotations.initMocks(this);
-		controller = new IngredientController(null, recipeService, null);
+		controller = new IngredientController(ingredientService, recipeService, unitOfMeasureService);
 		mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
 	}
 
@@ -59,4 +60,16 @@ public class IngredientControllerTest {
 		//verify
 		verify(recipeService, times(1)).findCommandById(2L);
 	}
+	
+	@Test
+	public void testDeleteIngredient() throws Exception {
+		mockMvc.perform(
+				get("/recipe/1/ingredient/2/delete"))
+			.andExpect(status().is3xxRedirection())
+			.andExpect(view().name("redirect:/recipe/1/ingredients"));
+		
+	    verify(ingredientService, times(1)).deleteByRecipeAndIngredientId(1L, 2L);
+	}
+	
+	
 }
