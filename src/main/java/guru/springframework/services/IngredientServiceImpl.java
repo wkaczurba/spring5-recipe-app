@@ -12,8 +12,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
  * Created by jt on 6/28/17.
@@ -115,49 +113,32 @@ public class IngredientServiceImpl implements IngredientService {
 
     }
 
-	@Override
-	@Transactional
-	public void deleteByRecipeAndIngredientId(Long recipeId, Long ingredientId) {
+    @Override
+    public void deleteById(Long recipeId, Long idToDelete) {
+
+        log.debug("Deleting ingredient: " + recipeId + ":" + idToDelete);
+
         Optional<Recipe> recipeOptional = recipeRepository.findById(recipeId);
 
-        if (!recipeOptional.isPresent()){
-            //todo impl error handling
-            log.error("recipe id not found. Id: " + recipeId);
+        if(recipeOptional.isPresent()){
+            Recipe recipe = recipeOptional.get();
+            log.debug("found recipe");
+
+            Optional<Ingredient> ingredientOptional = recipe
+                    .getIngredients()
+                    .stream()
+                    .filter(ingredient -> ingredient.getId().equals(idToDelete))
+                    .findFirst();
+
+            if(ingredientOptional.isPresent()){
+                log.debug("found Ingredient");
+                Ingredient ingredientToDelete = ingredientOptional.get();
+                ingredientToDelete.setRecipe(null);
+                recipe.getIngredients().remove(ingredientOptional.get());
+                recipeRepository.save(recipe);
+            }
+        } else {
+            log.debug("Recipe Id Not found. Id:" + recipeId);
         }
-
-        Recipe recipe = recipeOptional.get();
-        
-        log.debug("deleting recipe ingredient: " + ingredientId);
-        log.debug("recipe ingredients' ids before deleting: " + 
-        		recipe.getIngredients()
-        			.stream()
-        			.map(i -> i.getId().toString())
-        			.collect(Collectors.joining(",")));
-        
-        Optional<Ingredient> ingredientToDeleteOptional = recipe.getIngredients()
-        		.stream().filter(ing -> ing.getId().equals(ingredientId)).findFirst();
-        
-        Ingredient ingredientToDelete = ingredientToDeleteOptional.get();
-        ingredientToDelete.setRecipe(null);
-        recipe.getIngredients().remove(ingredientToDelete);
-        Recipe savedRecipe = recipeRepository.save(recipe);
-        
-        log.debug("recipe saved. ingredients' ids after delete: " + 
-        		savedRecipe.getIngredients()
-        			.stream()
-        			.map(i -> i.getId().toString())
-        			.collect(Collectors.joining(",")));
-
-//        Optional<IngredientCommand> ingredientCommandOptional = recipe.getIngredients().stream()
-//                .filter(ingredient -> ingredient.getId().equals(ingredientId))
-//                .map( ingredient -> ingredientToIngredientCommand.convert(ingredient)).findFirst();
-//
-//        if(!ingredientCommandOptional.isPresent()){
-//            //todo impl error handling
-//            log.error("Ingredient id not found: " + ingredientId);
-//        }
-//
-//        return ingredientCommandOptional.get();
-		
-	}
+    }
 }
