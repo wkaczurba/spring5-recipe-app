@@ -2,8 +2,10 @@ package guru.springframework.services;
 
 import org.springframework.web.multipart.MultipartFile;
 
+/**
+ * Created by jt on 7/3/17.
+ */
 public interface ImageService {
-	
-	public void saveImageFile(Long recipeId, MultipartFile file);
-	
+
+    void saveImageFile(Long recipeId, MultipartFile file);
 }
