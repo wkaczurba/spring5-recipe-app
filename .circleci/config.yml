@@ -30,7 +30,7 @@ jobs:
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
 
-      - run: mvn dependency:go-offline
+      - run: mvn dependency:go-offline corbertura:corbertura
 
       - save_cache:
           paths:
@@ -39,3 +39,11 @@ jobs:
         
       # run tests!
       - run: mvn integration-test
+
+      - store_test_results:
+          path: target/surefire-reports
+
+      - run:
+          name: Send to CodeCov
+          command: bash <(curl -s https://codecov.io/bash)      
+      
